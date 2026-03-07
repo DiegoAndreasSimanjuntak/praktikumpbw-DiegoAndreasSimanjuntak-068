@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Halaman Formulir</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+
+    <header>
+        <h1>Selamat Datang di Website Sederhana</h1>
+        <nav>
+            <a href="#">Beranda</a>
+            <a href="#">Tentang</a>
+            <a href="#">Layanan</a>
+            <a href="#">Kontak</a>
+        </nav>
+    </header>
+
+    <div class="content">
+
+        <div class="form-box">
+            <h2>Formulir Pendaftaran</h2>
+            <p>Silakan isi formulir di bawah ini untuk mendaftar.</p>
+
+            <form>
+
+                <label>Nama Lengkap:</label>
+                <input type="text">
+
+                <label>Email:</label>
+                <input type="email">
+
+                <label>Password:</label>
+                <input type="password">
+
+                <label>Jenis Kelamin:</label>
+                <div class="radio-group">
+                    <label><input type="radio" name="jk"> Laki-laki</label>
+                    <label><input type="radio" name="jk"> Perempuan</label>
+                </div>
+
+                <hr>
+
+                <label>Hobi:</label>
+                <div class="checkbox-group">
+                    <label><input type="checkbox"> Musik</label>
+                    <label><input type="checkbox"> Olahraga</label>
+                    <label><input type="checkbox"> Membaca</label>
+                </div>
+
+                <hr>
+
+                <label>Pilih Kota:</label>
+                <select>
+                    <option>Jakarta</option>
+                    <option>Bandung</option>
+                    <option>Surabaya</option>
+                </select>
+
+                <label>Pesan Tambahan:</label>
+                <textarea placeholder="Tulis pesan di sini..."></textarea>
+
+                <button type="submit">Kirim</button>
+
+            </form>
+        </div>
+
+        <aside class="sidebar">
+            <h3>Sidebar</h3>
+            <p>Bagian sidebar dapat berisi tautan, iklan, atau informasi tambahan.</p>
+        </aside>
+
+    </div>
+
+</div>
+
+</body>
+</html>
