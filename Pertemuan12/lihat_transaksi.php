@@ -13,38 +13,36 @@ $result = $conn->query($query);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="css/output.css" rel="stylesheet">
     <title>Daftar Pesanan</title>
 </head>
 
-<body class="bg-slate-50 min-h-screen">
+<body>
     <?php include 'nav.php'; ?>
-    <div class="max-w-6xl mx-auto px-4 py-8">
-        <div class="rounded-3xl bg-white p-8 shadow-sm border border-slate-200">
-            <h2 class="text-2xl font-semibold mb-6 text-slate-900">Daftar Pesanan</h2>
-            <div class="overflow-x-auto">
-                <table class="min-w-full divide-y divide-slate-200">
-                    <thead class="bg-slate-100">
-                        <tr>
-                            <th class="px-4 py-3 text-left text-sm font-semibold text-slate-700">ID Pesanan</th>
-                            <th class="px-4 py-3 text-left text-sm font-semibold text-slate-700">Nama Pelanggan</th>
-                            <th class="px-4 py-3 text-left text-sm font-semibold text-slate-700">Tanggal Pesanan</th>
-                            <th class="px-4 py-3 text-left text-sm font-semibold text-slate-700">Total Harga</th>
-                        </tr>
-                    </thead>
-                    <tbody class="divide-y divide-slate-200 bg-white">
-                        <?php while ($row = $result->fetch_assoc()): ?>
-                            <tr class="hover:bg-slate-50">
-                                <td class="px-4 py-3 text-sm text-slate-700"><?= $row['Pesanan_ID'] ?></td>
-                                <td class="px-4 py-3 text-sm text-slate-700"><?= htmlspecialchars($row['Nama_Pelanggan']) ?></td>
-                                <td class="px-4 py-3 text-sm text-slate-700"><?= $row['Tanggal_Pesanan'] ?></td>
-                                <td class="px-4 py-3 text-sm text-slate-700">Rp <?= number_format($row['Total_Harga'], 2) ?></td>
-                            </tr>
-                        <?php endwhile; ?>
-                    </tbody>
-                </table>
-            </div>
-        </div>
+    <div class="max-w-7xl mx-auto px-4 mt-4">
+        <h2 class="text-2xl font-bold mb-4">Daftar Pesanan</h2>
+
+        <!-- Tabel Daftar Pesanan -->
+        <table class="w-full border-collapse border border-gray-300">
+            <thead class="bg-gray-100">
+                <tr>
+                    <th class="border border-gray-300 px-4 py-2 text-left">ID Pesanan</th>
+                    <th class="border border-gray-300 px-4 py-2 text-left">Nama Pelanggan</th>
+                    <th class="border border-gray-300 px-4 py-2 text-left">Tanggal Pesanan</th>
+                    <th class="border border-gray-300 px-4 py-2 text-left">Total Harga</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php while ($row = $result->fetch_assoc()): ?>
+                    <tr class="border-b">
+                        <td class="px-4 py-2"><?= $row['Pesanan_ID'] ?></td>
+                        <td class="px-4 py-2"><?= htmlspecialchars($row['Nama_Pelanggan']) ?></td>
+                        <td class="px-4 py-2"><?= $row['Tanggal_Pesanan'] ?></td>
+                        <td class="px-4 py-2">Rp <?= number_format($row['Total_Harga'], 2) ?></td>
+                    </tr>
+                <?php endwhile; ?>
+            </tbody>
+        </table>
     </div>
 </body>
 

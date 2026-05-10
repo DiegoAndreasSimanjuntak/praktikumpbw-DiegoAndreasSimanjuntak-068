@@ -9,61 +9,64 @@ include 'proses_index.php';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="css/output.css" rel="stylesheet">
     <title>Daftar Buku</title>
 </head>
 
-<body class="bg-slate-50 min-h-screen">
+<body>
     <?php include 'nav.php'; ?>
-    <div class="max-w-7xl mx-auto px-4 py-8">
-        <h2 class="text-3xl font-semibold mb-6 text-slate-900">Daftar Buku</h2>
+    <div class="max-w-7xl mx-auto px-4 mt-4">
+        <h2 class="text-2xl font-bold mb-4">Daftar Buku</h2>
 
         <!-- Form Pencarian -->
-        <form method="get" class="grid gap-4 lg:grid-cols-5 mb-6">
-            <div class="lg:col-span-2">
-                <label for="judul" class="block mb-2 text-sm font-medium text-slate-700">Cari Berdasarkan Judul</label>
-                <input type="text" class="w-full rounded-2xl border border-slate-300 bg-slate-50 px-4 py-3 text-slate-900 outline-none focus:border-slate-400 focus:ring-2 focus:ring-slate-200" id="judul" name="judul" placeholder="Masukkan judul buku" value="<?php echo htmlspecialchars($search_judul) ?>">
+        <form method="get" class="flex flex-wrap gap-4 mb-4">
+            <div class="w-full md:w-1/2 lg:w-2/5">
+                <label for="judul" class="block text-sm font-medium text-gray-700 mb-1">Cari Berdasarkan Judul</label>
+                <input type="text" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" id="judul" name="judul" placeholder="Masukkan judul buku"
+                    value="<?php echo htmlspecialchars($search_judul) ?>">
             </div>
-            <div class="lg:col-span-2">
-                <label for="tahun_terbit" class="block mb-2 text-sm font-medium text-slate-700">Cari Berdasarkan Tahun Terbit</label>
-                <input type="number" class="w-full rounded-2xl border border-slate-300 bg-slate-50 px-4 py-3 text-slate-900 outline-none focus:border-slate-400 focus:ring-2 focus:ring-slate-200" id="tahun_terbit" name="tahun_terbit" placeholder="Masukkan tahun terbit" value="<?php echo htmlspecialchars($search_tahun) ?>">
+            <div class="w-full md:w-1/3">
+                <label for="tahun_terbit" class="block text-sm font-medium text-gray-700 mb-1">Cari Berdasarkan Tahun Terbit</label>
+                <input type="number" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" id="tahun_terbit" name="tahun_terbit"
+                    placeholder="Masukkan tahun terbit" value="<?php echo htmlspecialchars($search_tahun) ?>">
             </div>
-            <div class="flex items-end gap-3">
-                <button type="submit" class="inline-flex h-12 items-center justify-center rounded-2xl bg-slate-900 px-5 text-white font-semibold hover:bg-slate-800">Cari</button>
-                <a href="index.php" class="inline-flex h-12 items-center justify-center rounded-2xl border border-slate-300 bg-white px-5 text-slate-900 hover:bg-slate-100">Reset</a>
+            <div class="flex items-end">
+                <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Cari</button>
+            </div>
+            <div class="flex items-end">
+                <a href="index.php" class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600">Reset</a>
             </div>
         </form>
 
         <!-- Tabel Daftar Buku -->
-        <div class="overflow-x-auto rounded-3xl bg-white shadow-sm border border-slate-200">
-            <table class="min-w-full divide-y divide-slate-200">
-                    <thead class="bg-slate-100">
-                        <tr>
-                            <th class="px-4 py-3 text-left text-sm font-semibold text-slate-700">ID</th>
-                            <th class="px-4 py-3 text-left text-sm font-semibold text-slate-700">Judul</th>
-                            <th class="px-4 py-3 text-left text-sm font-semibold text-slate-700">Penulis</th>
-                            <th class="px-4 py-3 text-left text-sm font-semibold text-slate-700">Tahun Terbit</th>
-                            <th class="px-4 py-3 text-left text-sm font-semibold text-slate-700">Harga</th>
-                            <th class="px-4 py-3 text-left text-sm font-semibold text-slate-700">Aksi</th>
-                        </tr>
-                    </thead>
-                    <tbody class="divide-y divide-slate-200 bg-white">
-                        <?php while ($row = $result->fetch_assoc()): ?>
-                            <tr class="hover:bg-slate-50">
-                                <td class="px-4 py-3 text-sm text-slate-700"><?php echo $row['ID'] ?></td>
-                                <td class="px-4 py-3 text-sm text-slate-700"><?php echo htmlspecialchars($row['Judul']) ?></td>
-                                <td class="px-4 py-3 text-sm text-slate-700"><?php echo htmlspecialchars($row['Penulis']) ?></td>
-                                <td class="px-4 py-3 text-sm text-slate-700"><?php echo $row['Tahun_Terbit'] ?></td>
-                                <td class="px-4 py-3 text-sm text-slate-700">Rp<?php echo number_format($row['Harga'], 2) ?></td>
-                                <td class="px-4 py-3 text-sm text-slate-700 space-x-2">
-                                    <a href="form_edit.php?id=<?php echo $row['ID'] ?>" class="inline-flex rounded-2xl bg-amber-500 px-3 py-2 text-sm font-semibold text-slate-900 hover:bg-amber-400">Edit</a>
-                                    <a href="proses_hapus.php?id=<?php echo $row['ID'] ?>" class="inline-flex rounded-2xl bg-red-500 px-3 py-2 text-sm font-semibold text-white hover:bg-red-400" onclick="return confirm('Yakin ingin menghapus?')">Hapus</a>
-                                </td>
-                            </tr>
-                        <?php endwhile; ?>
-                    </tbody>
-                </table>
-            </div>
+        <table class="w-full border-collapse border border-gray-300">
+            <thead class="bg-gray-100">
+                <tr>
+                    <th class="border border-gray-300 px-4 py-2 text-left">ID</th>
+                    <th class="border border-gray-300 px-4 py-2 text-left">Judul</th>
+                    <th class="border border-gray-300 px-4 py-2 text-left">Penulis</th>
+                    <th class="border border-gray-300 px-4 py-2 text-left">Tahun Terbit</th>
+                    <th class="border border-gray-300 px-4 py-2 text-left">Harga</th>
+                    <th class="border border-gray-300 px-4 py-2 text-left">Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php while ($row = $result->fetch_assoc()): ?>
+                    <tr class="border-b">
+                        <td class="px-4 py-2"><?php echo $row['ID'] ?></td>
+                        <td class="px-4 py-2"><?php echo htmlspecialchars($row['Judul']) ?></td>
+                        <td class="px-4 py-2"><?php echo htmlspecialchars($row['Penulis']) ?></td>
+                        <td class="px-4 py-2"><?php echo $row['Tahun_Terbit'] ?></td>
+                        <td class="px-4 py-2">Rp<?php echo number_format($row['Harga'], 2) ?></td>
+                        <td class="px-4 py-2">
+                            <a href="form_edit.php?id=<?php echo $row['ID'] ?>" class="bg-yellow-500 text-white px-3 py-1 rounded hover:bg-yellow-600 mr-2">Edit</a>
+                            <a href="proses_hapus.php?id=<?php echo $row['ID'] ?>" class="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600" onclick="return confirm('Yakin ingin menghapus?')">Hapus</a>
+                        </td>
+                    </tr>
+                <?php endwhile; ?>
+            </tbody>
+        </table>
+    </div>
 </body>
 
 </html>
